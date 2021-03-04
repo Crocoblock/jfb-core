@@ -6,9 +6,7 @@ namespace JFBCore;
 
 abstract class JFBActionsManager {
 
-	public static $instance = null;
-
-	protected function __construct() {
+	public function __construct() {
 		add_action(
 			'jet-form-builder/actions/register',
 			array( $this, 'register_controller' )
