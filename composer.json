@@ -1,0 +1,17 @@
+{
+    "name": "hug.reed/jfbcore",
+    "description": "Managers for registering actions for FormBuilder and Engine",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Oleksandr Ivanenko",
+            "email": "sanko200065@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "JFBCore\\": "src/"
+        }
+    }
+}
