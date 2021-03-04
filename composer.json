@@ -1,6 +1,7 @@
 {
     "name": "hug.reed/jfbcore",
     "description": "Managers for registering actions for FormBuilder and Engine",
+    "license": "GPL-3.0-or-later",
     "type": "library",
     "authors": [
         {
