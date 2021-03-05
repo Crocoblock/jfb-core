@@ -15,17 +15,18 @@ abstract class JEFNotificationsManager {
 	abstract public function register_notification();
 
 	public function __construct() {
-		add_action( 'init', array( $this, 'setup_notifications' ) );
-
-		$this->init();
+		if ( $this->can_init() ) {
+			$this->add_hooks();
+		}
 	}
 
-
-	public static function can_init() {
+	public function can_init() {
 		return function_exists( 'jet_engine' );
 	}
 
-	public function init() {
+	public function add_hooks() {
+		add_action( 'init', array( $this, 'setup_notifications' ) );
+
 		add_filter(
 			'jet-engine/forms/booking/notification-types',
 			array( $this, 'register_notifications' )
