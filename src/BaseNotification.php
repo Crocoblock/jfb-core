@@ -13,7 +13,8 @@ abstract class BaseNotification {
 		);
 	}
 
-	public function register_assets_for_editor() {}
+	public function register_assets_for_editor() {
+	}
 
 	/**
 	 * Fires on
@@ -33,5 +34,19 @@ abstract class BaseNotification {
 	 * @return mixed
 	 */
 	abstract public function do_action( array $settings, $notifications );
+
+	protected function get_action_source() {
+		if ( ! ( $this instanceof MessagesHelper ) || ! ( $this instanceof ActionLocalize ) ) {
+			return array();
+		}
+
+		$action_localize                    = $this->action_data();
+		$action_localize['__messages']      = $this->get_messages_default();
+		$action_localize['__labels']        = $this->editor_labels();
+		$action_localize['__help_messages'] = $this->editor_labels_help();
+		$action_localize['__gateway_attrs'] = $this->visible_attributes_for_gateway_editor();
+
+		return json_encode( $action_localize );
+	}
 
 }

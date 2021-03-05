@@ -74,16 +74,8 @@ abstract class JEFNotificationsManager {
 
 	public function localize_notifications_for_editor() {
 		self::register_action_localize_helper();
-		self::localize_action_types( $this->notifications );
 	}
 
-	public static function localize_action_types( $types, $handle = self::ENGINE_HANDLE ) {
-		wp_localize_script(
-			$handle,
-			'jetFormActionTypes',
-			self::prepare_actions_data( $types, $handle )
-		);
-	}
 
 	public static function register_action_localize_helper() {
 		wp_enqueue_script(
@@ -92,38 +84,6 @@ abstract class JEFNotificationsManager {
 			array(),
 			JET_FORM_BUILDER_VERSION
 		);
-	}
-
-	public static function prepare_actions_data( $source, $handle ) {
-		$prepared_types = array();
-
-		foreach ( $source as $type ) {
-
-			$type_script_name = $type->self_script_name();
-
-			$prepared_types[] = array(
-				'id'       => $type->get_id(),
-				'name'     => $type->get_name(),
-				'self'     => $type_script_name,
-				'callback' => false, // should be rewritten from JS
-			);
-			$action_localize  = $type->action_data();
-
-			$action_localize['__messages']      = $type->get_messages_default();
-			$action_localize['__labels']        = $type->editor_labels();
-			$action_localize['__help_messages'] = $type->editor_labels_help();
-			$action_localize['__gateway_attrs'] = $type->visible_attributes_for_gateway_editor();
-
-			if ( ! empty( $action_localize ) && $type_script_name ) {
-				wp_localize_script(
-					$handle,
-					$type->self_script_name(),
-					$action_localize
-				);
-			}
-		}
-
-		return $prepared_types;
 	}
 
 }
