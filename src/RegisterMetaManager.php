@@ -10,11 +10,9 @@ trait RegisterMetaManager {
 		add_action( 'init', array( $this, '_register_meta' ), 100 );
 	}
 
-	public function meta_data() {
-		return array();
-	}
+	abstract public function meta_data();
 
-	private function _register_meta() {
+	final public function _register_meta() {
 		$meta_data = $this->meta_data();
 
 		if ( ! $meta_data ) {
