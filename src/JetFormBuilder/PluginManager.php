@@ -17,6 +17,4 @@ abstract class PluginManager {
 		$this->meta_manager_init();
 	}
 
-
-
 }
