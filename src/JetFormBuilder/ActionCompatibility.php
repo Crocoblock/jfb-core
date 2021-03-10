@@ -1,7 +1,7 @@
 <?php
 
 
-namespace JFBCore;
+namespace JFBCore\JetFormBuilder;
 
 /**
  * Use this if you set action data from user side (.js)

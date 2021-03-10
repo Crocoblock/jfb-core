@@ -1,10 +1,10 @@
 <?php
 
 
-namespace JFBCore;
+namespace JFBCore\JetFormBuilder;
 
 
-abstract class JFBPluginManager {
+abstract class PluginManager {
 
 	use EditorAssetsManager;
 	use WithJFBInit;

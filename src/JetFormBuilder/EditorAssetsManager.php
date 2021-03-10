@@ -1,7 +1,7 @@
 <?php
 
 
-namespace JFBCore;
+namespace JFBCore\JetFormBuilder;
 
 
 trait EditorAssetsManager {

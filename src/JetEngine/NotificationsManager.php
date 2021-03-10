@@ -1,9 +1,9 @@
 <?php
 
 
-namespace JFBCore;
+namespace JFBCore\JetEngine;
 
-abstract class JEFNotificationsManager {
+abstract class NotificationsManager {
 
 	public $notifications = array();
 

@@ -1,10 +1,10 @@
 <?php
 
 
-namespace JFBCore;
+namespace JFBCore\JetFormBuilder;
 
 
-abstract class JFBActionsManager {
+abstract class ActionsManager {
 
 	use WithJFBInit;
 	use EditorAssetsManager;
