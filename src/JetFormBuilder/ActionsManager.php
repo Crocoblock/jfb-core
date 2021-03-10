@@ -9,6 +9,10 @@ abstract class ActionsManager {
 	use WithJFBInit;
 	use EditorAssetsManager;
 
+	protected function init() {
+		$this->jfb_maybe_init();
+	}
+
 	public function _on_jbf_init() {
 		add_action(
 			'jet-form-builder/actions/register',

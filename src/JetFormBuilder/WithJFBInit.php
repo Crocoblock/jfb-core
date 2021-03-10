@@ -6,7 +6,7 @@ namespace JFBCore\JetFormBuilder;
 
 trait WithJFBInit {
 
-	public function __construct() {
+	public function jfb_maybe_init() {
 		if ( $this->can_init() ) {
 			$this->_on_jbf_init();
 		}
