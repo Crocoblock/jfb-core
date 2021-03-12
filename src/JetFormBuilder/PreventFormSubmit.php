@@ -35,16 +35,16 @@ abstract class PreventFormSubmit {
 			);
 
 			return;
+		} elseif ( isset( $_REQUEST[ $handler->hook_key ] ) && $handler->hook_val === $_REQUEST[ $handler->hook_key ] ) {
+			remove_action(
+				'wp_loaded',
+				array( $handler, 'process_form' ), 0
+			);
+			add_action(
+				'wp_loaded',
+				array( $this, '_prevent_reload_submit' )
+			);
 		}
-
-		remove_action(
-			'wp_loaded',
-			array( $handler, 'process_form' ), 0
-		);
-		add_action(
-			'wp_loaded',
-			array( $this, '_prevent_reload_submit' )
-		);
 	}
 
 	abstract public function prevent_process_ajax_form( Form_Handler $handler );
