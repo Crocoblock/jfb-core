@@ -43,6 +43,8 @@ abstract class RegisterFormMetaBox {
 	public function register_assets() {
 	}
 
+
+
 	/**
 	 * Save gateways related meta
 	 *
@@ -50,8 +52,8 @@ abstract class RegisterFormMetaBox {
 	 *
 	 * @return void
 	 */
-	final public function save_meta( $post_id ) {
-		$data = isset( $_POST[ $this->get_id() ] ) ? $_POST[ $this->get_id() ] : json_encode( array() );
+	public function save_meta( $post_id ) {
+		$data = isset( $_POST[ $this->get_id() ] ) ? json_encode( $_POST[ $this->get_id() ] ) : json_encode( array() );
 
 		update_post_meta( $post_id, $this->get_id(), wp_slash( $data ) );
 	}
