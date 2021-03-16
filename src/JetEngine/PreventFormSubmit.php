@@ -1,26 +1,29 @@
 <?php
 
 
-namespace JFBCore\JetFormBuilder;
+namespace JFBCore\JetEngine;
 
 
 use JFBCore\PreventFormSubmitBase;
 
 abstract class PreventFormSubmit extends PreventFormSubmitBase {
 
+	protected $action = 'jet_engine_form_booking_submit';
+
 	public function can_init() {
-		return function_exists( 'jet_form_builder' );
+		return function_exists( 'jet_engine' );
 	}
 
 	public function action_init() {
-		return 'after_setup_theme';
+		return 'init';
 	}
 
 	public function manage_hooks_data() {
 		return array(
-			jet_form_builder()->form_handler,
-			jet_form_builder()->form_handler->hook_key,
+			jet_engine()->forms->handler,
+			$this->action,
 		);
 	}
+
 
 }
