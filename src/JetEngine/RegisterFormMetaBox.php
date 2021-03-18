@@ -44,22 +44,6 @@ abstract class RegisterFormMetaBox {
 	}
 
 	/**
-	 * Returns gatewyas config for current form
-	 *
-	 * @param  [type] $post_id [description]
-	 *
-	 * @return [type]          [description]
-	 */
-	public function get_meta_box_settings( $form_id = 0 ) {
-		if ( ! $form_id ) {
-			$form_id = get_the_ID();
-		}
-		$meta = get_post_meta( $form_id, $this->get_id(), true );
-
-		return $meta ? json_decode( $meta, true ) : array();
-	}
-
-	/**
 	 * Save gateways related meta
 	 *
 	 * @param $post_id
