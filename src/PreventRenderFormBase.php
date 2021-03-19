@@ -9,8 +9,12 @@ trait PreventRenderFormBase {
 	public function __construct() {
 		add_filter(
 			$this->action_name(),
-			array( $this, 'prevent_render_form' ), 10, 2
+			array( $this, 'prevent_render_form' ), $this->priority(), 2
 		);
+	}
+
+	public function priority() {
+		return 100;
 	}
 
 	abstract public function render_form( $form_id, $attrs );

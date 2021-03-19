@@ -26,7 +26,7 @@ class MetaQuery {
 		}
 		$meta = get_post_meta( $post_id, $key, true );
 
-		return $meta ? json_decode( $meta, true ) : array();
+		return $meta ? json_decode( wp_unslash( $meta ), true ) : array();
 	}
 
 	public static function set_json_meta( array $params ) {
@@ -42,7 +42,7 @@ class MetaQuery {
 			$post_id = get_the_ID();
 		}
 
-		return update_post_meta( $post_id, $key, json_encode( $value ) );
+		return update_post_meta( $post_id, $key, wp_unslash( json_encode( $value ) ) );
 	}
 
 }
