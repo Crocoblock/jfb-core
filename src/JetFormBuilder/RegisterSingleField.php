@@ -4,8 +4,9 @@
 namespace JFBCore\JetFormBuilder;
 
 
-
 trait RegisterSingleField {
+
+	use EditorAssetsManager;
 
 	public static function register() {
 		if ( ! function_exists( 'jet_form_builder' ) ) {
@@ -13,7 +14,10 @@ trait RegisterSingleField {
 		}
 
 		add_action( 'jet-form-builder/blocks/register', function ( $manager ) {
-			$manager->register_block_type( new static() );
+			$block = new static();
+			$block->assets_init();
+
+			$manager->register_block_type( $block );
 		} );
 	}
 
