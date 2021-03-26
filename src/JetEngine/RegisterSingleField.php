@@ -40,9 +40,13 @@ trait RegisterSingleField {
 	abstract public function get_title();
 
 	/**
+	 * @param $template
+	 * @param $args
+	 * @param $builder
+	 *
 	 * @return string
 	 */
-	abstract public function get_field_template();
+	abstract public function get_field_template( $template, $args, $builder );
 
 	/**
 	 * Displays a template
