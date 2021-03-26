@@ -29,12 +29,26 @@ trait RegisterSingleField {
 	}
 
 
+	/**
+	 * @return string
+	 */
 	abstract public function get_id();
 
+	/**
+	 * @return string
+	 */
 	abstract public function get_title();
 
+	/**
+	 * @return string
+	 */
 	abstract public function get_field_template();
 
+	/**
+	 * Displays a template
+	 *
+	 * @return void
+	 */
 	abstract public function render_field_edit();
 
 	final public function register_form_fields( $fields ) {
