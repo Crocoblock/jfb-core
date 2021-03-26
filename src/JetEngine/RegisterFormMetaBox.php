@@ -6,7 +6,13 @@ namespace JFBCore\JetEngine;
 
 abstract class RegisterFormMetaBox {
 
-	public function __construct() {
+	public static function register() {
+		if ( function_exists( 'jet_engine' ) ) {
+			( new static() )->_add_hooks();
+		}
+	}
+
+	private function _add_hooks() {
 		add_action(
 			'jet-engine/forms/editor/meta-boxes',
 			array( $this, 'register_meta_box' )
@@ -51,7 +57,7 @@ abstract class RegisterFormMetaBox {
 	 * @return void
 	 */
 	public function save_meta( $post_id ) {
-		$data = isset( $_POST[ $this->get_id() ] ) ? json_encode( $_POST[ $this->get_id() ] ) : json_encode( array() );
+		$data = isset( $_POST[ $this->get_id() ] ) ? json_encode( $_POST[ $this->get_id() ] ) : '{}';
 
 		update_post_meta( $post_id, $this->get_id(), wp_slash( $data ) );
 	}

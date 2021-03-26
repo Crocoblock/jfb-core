@@ -12,8 +12,8 @@ abstract class PluginManager {
 	use RegisterMetaManager;
 	use WithJFBInit;
 
-	protected function init() {
-		$this->jfb_maybe_init();
+	public static function register() {
+		( new static() )->jfb_maybe_init();
 	}
 
 	final protected function _on_jbf_init() {
