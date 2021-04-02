@@ -51,6 +51,9 @@ trait AttributesTrait {
 	public function get_attributes_string_save() {
 		$response = '';
 		foreach ( $this->attrs as $attr => $value ) {
+			if ( is_array( $value ) ) {
+				$value = implode( ' ', $value );
+			}
 			$response .= sprintf( ' %1$s="%2$s"', $attr, $value );
 		}
 
