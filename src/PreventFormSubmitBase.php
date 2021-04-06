@@ -61,33 +61,20 @@ abstract class PreventFormSubmitBase {
 		[ $handler, $action_name ] = $this->manage_hooks_data();
 
 		if ( wp_doing_ajax() ) {
-			remove_action(
-				'wp_ajax_' . $action_name,
-				array( $handler, 'process_ajax_form' )
-			);
-
-			remove_action(
-				'wp_ajax_nopriv_' . $action_name,
-				array( $handler, 'process_ajax_form' )
-			);
 			add_action(
 				'wp_ajax_' . $action_name,
-				array( $this, '_prevent_ajax_submit' ), 0
+				array( $this, '_prevent_ajax_submit' ), -100
 			);
 			add_action(
 				'wp_ajax_nopriv_' . $action_name,
-				array( $this, '_prevent_ajax_submit' ), 0
+				array( $this, '_prevent_ajax_submit' ), -100
 			);
 
 			return;
 		} elseif ( isset( $_REQUEST[ $handler->hook_key ] ) && $handler->hook_val === $_REQUEST[ $handler->hook_key ] ) {
-			remove_action(
-				'wp_loaded',
-				array( $handler, 'process_form' ), 0
-			);
 			add_action(
 				'wp_loaded',
-				array( $this, '_prevent_reload_submit' )
+				array( $this, '_prevent_reload_submit' ), -100
 			);
 		}
 	}
