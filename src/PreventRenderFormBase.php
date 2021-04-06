@@ -17,7 +17,7 @@ trait PreventRenderFormBase {
 		return 100;
 	}
 
-	abstract public function render_form( $form_id, $attrs );
+	abstract public function render_form( $form_id, $attrs, $prev_content );
 
 	abstract public function form_id_key();
 
@@ -27,6 +27,6 @@ trait PreventRenderFormBase {
 		$form_id = isset( $attrs[ $this->form_id_key() ] ) ? absint( $attrs[ $this->form_id_key() ] ) : 0;
 		unset( $attrs[ $this->form_id_key() ] );
 
-		return $this->render_form( $form_id, $attrs );
+		return $this->render_form( $form_id, $attrs, $content );
 	}
 }

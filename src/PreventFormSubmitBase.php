@@ -6,14 +6,17 @@ namespace JFBCore;
 
 abstract class PreventFormSubmitBase {
 
-	public function __construct() {
-		if ( $this->can_init() ) {
+	public static function register() {
+		$instance = new static();
+
+		if ( $instance->can_init() ) {
 			add_action(
-				$this->action_init(),
-				array( $this, 'manage_hooks' )
+				$instance->action_init(),
+				array( $instance, 'manage_hooks' )
 			);
 		}
 	}
+
 
 	/**
 	 * Can be overridden in JFBCore space
