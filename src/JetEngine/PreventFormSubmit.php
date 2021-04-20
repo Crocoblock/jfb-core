@@ -11,7 +11,10 @@ abstract class PreventFormSubmit extends PreventFormSubmitBase {
 	protected $action = 'jet_engine_form_booking_submit';
 
 	public function can_init() {
-		return function_exists( 'jet_engine' );
+		return (
+			function_exists( 'jet_engine' )
+		    && jet_engine()->modules->is_module_active( 'booking-forms' )
+		);
 	}
 
 	public function action_init() {

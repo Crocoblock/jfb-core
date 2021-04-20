@@ -9,12 +9,11 @@ abstract class PreventFormSubmitBase {
 	public static function register() {
 		$instance = new static();
 
-		if ( $instance->can_init() ) {
-			add_action(
-				$instance->action_init(),
-				array( $instance, 'manage_hooks' )
-			);
-		}
+		add_action( $instance->action_init(), function () use ( $instance ) {
+			if ( $instance->can_init() ) {
+				$instance->manage_hooks();
+			}
+		} );
 	}
 
 
