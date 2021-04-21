@@ -57,7 +57,7 @@ abstract class RegisterFormMetaBox {
 	 * @return void
 	 */
 	public function save_meta( $post_id ) {
-		$data = isset( $_POST[ $this->get_id() ] ) ? json_encode( $_POST[ $this->get_id() ] ) : '{}';
+		$data = isset( $_POST[ $this->get_id() ] ) ? json_encode( $_POST[ $this->get_id() ], JSON_UNESCAPED_UNICODE ) : '{}';
 
 		update_post_meta( $post_id, $this->get_id(), wp_slash( $data ) );
 	}
