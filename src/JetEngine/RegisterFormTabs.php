@@ -13,11 +13,13 @@ trait RegisterFormTabs {
 	}
 
 	public static function register() {
-		$instance = ( new static() );
+		add_action( 'jet-engine/forms/init', function () {
+			$instance = ( new static() );
 
-		if ( $instance->condition() ) {
-			$instance->init();
-		}
+			if ( $instance->condition() ) {
+				$instance->init();
+			}
+		} );
 	}
 
 	public function init() {
