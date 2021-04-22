@@ -9,7 +9,11 @@ abstract class BaseNotification {
 	public function __construct() {
 		add_action(
 			'jet-engine/forms/editor/before-assets',
-			array( $this, 'register_assets_for_editor' )
+			array( $this, 'register_assets_before' )
+		);
+		add_action(
+			'jet-engine/forms/editor/assets',
+			array( $this, 'register_assets' )
 		);
 	}
 
