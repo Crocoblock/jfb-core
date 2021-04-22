@@ -17,7 +17,10 @@ abstract class BaseNotification {
 		);
 	}
 
-	public function register_assets_for_editor() {
+	public function register_assets() {
+	}
+
+	public function register_assets_before() {
 	}
 
 	/**
