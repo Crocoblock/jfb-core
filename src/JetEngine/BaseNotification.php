@@ -33,10 +33,7 @@ abstract class BaseNotification {
 		?>
 		<template v-if="'<?= $this->get_id() ?>' === currentItem.type">
 			<keep-alive>
-				<jet-engine-notification-<?= $this->get_id() ?>
-					v-model="currentItem.<?= $this->get_id() ?>"
-					<?= $this->get_component_props_string(); ?>
-				/>
+				<jet-engine-notification-<?= $this->get_id() ?> v-model="currentItem.<?= $this->get_id() ?>" <?= $this->get_component_props_string(); ?>/>
 			</keep-alive>
 		</template>
 		<?php
