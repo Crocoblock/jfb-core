@@ -24,6 +24,15 @@ trait RegisterSingleField {
 			'jet-engine/forms/edit-field/before',
 			array( $this, 'render_field_edit' )
 		);
+
+		add_action(
+			'jet-engine/forms/editor/before-assets',
+			array( $this, 'register_assets_before' )
+		);
+		add_action(
+			'jet-engine/forms/editor/assets',
+			array( $this, 'register_assets' )
+		);
 	}
 
 	public static function register() {
@@ -31,6 +40,12 @@ trait RegisterSingleField {
 			( new static() )->add_hooks();
 		}
 	}
+
+	public function register_assets_before() {
+    }
+
+    public function register_assets() {
+    }
 
 
 	/**
