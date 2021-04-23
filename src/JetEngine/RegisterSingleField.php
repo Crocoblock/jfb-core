@@ -4,7 +4,11 @@
 namespace JFBCore\JetEngine;
 
 
+use JFBCore\VueComponentProps;
+
 trait RegisterSingleField {
+
+	use VueComponentProps;
 
 	private function add_hooks() {
 		add_filter(
@@ -53,7 +57,15 @@ trait RegisterSingleField {
 	 *
 	 * @return void
 	 */
-	abstract public function render_field_edit();
+	public function render_field_edit() {
+		?>
+		<template v-if="'<?= $this->get_id(); ?>' === currentItem.settings.type">
+			<keep-alive>
+				<jet-engine-field-<?= $this->get_id(); ?> v-model="currentItem.settings.<?= $this->get_id(); ?>" <?= $this->vue_component_props_string(); ?>>
+			</keep-alive>
+		</template>
+		<?php
+	}
 
 	final public function register_form_fields( $fields ) {
 		$fields[ $this->get_id() ] = $this->get_title();
