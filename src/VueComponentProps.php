@@ -13,7 +13,7 @@ trait VueComponentProps {
 	final public function vue_component_props_string() {
 		$result = array();
 
-		foreach ( $this->component_props() as $prop => $value ) {
+		foreach ( $this->vue_component_props() as $prop => $value ) {
 			$result[] = "$prop=\"$value\"";
 		}
 
