@@ -31,7 +31,17 @@ abstract class RegisterFormMetaBox {
 
 	abstract public function get_title();
 
-	abstract public function get_fields();
+	public function get_fields() {
+		$slug = $this->get_id();
+		$content = "<div id='jet-engine-meta-box-{$slug}'>Use <pre>wp.hooks.addFilter( 'jet.engine.register.metaBoxes' ... </pre></div>";
+
+		return array(
+			$this->get_id() => array(
+				'type' => 'html',
+				'html' => $content,
+			)
+		);
+	}
 
 	final public function register_meta_box( $editor ) {
 		new \Cherry_X_Post_Meta( array(
