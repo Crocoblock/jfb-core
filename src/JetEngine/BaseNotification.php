@@ -27,7 +27,7 @@ abstract class BaseNotification {
 	public function register_assets_before() {
 	}
 
-	public function component_props() {
+	public function vue_component_props() {
 		return array(
 			':fields' => 'availableFields'
 		);
