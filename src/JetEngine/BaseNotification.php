@@ -10,6 +10,10 @@ abstract class BaseNotification {
 
     use VueComponentProps;
 
+	abstract public function get_id();
+
+	abstract public function get_name();
+
 	public function __construct() {
 		add_action(
 			'jet-engine/forms/editor/before-assets',
