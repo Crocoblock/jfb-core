@@ -7,8 +7,6 @@ abstract class NotificationsManager {
 
 	public $notifications = array();
 
-	const ENGINE_HANDLE = 'jet-fb-action-localize-helper';
-
 	/**
 	 * @return array
 	 */
@@ -30,11 +28,6 @@ abstract class NotificationsManager {
 		add_filter(
 			'jet-engine/forms/booking/notification-types',
 			array( $this, 'register_notifications' )
-		);
-
-		add_action(
-			'jet-engine/forms/editor/before-assets',
-			array( $this, 'localize_notifications_for_editor' ), 0
 		);
 	}
 
@@ -70,20 +63,6 @@ abstract class NotificationsManager {
 		}
 
 		return $notifications;
-	}
-
-	public function localize_notifications_for_editor() {
-		self::register_action_localize_helper();
-	}
-
-
-	public static function register_action_localize_helper() {
-		wp_enqueue_script(
-			self::ENGINE_HANDLE,
-			JET_FORM_BUILDER_URL . 'assets/js/action-localize-helper.js',
-			array(),
-			JET_FORM_BUILDER_VERSION
-		);
 	}
 
 }
