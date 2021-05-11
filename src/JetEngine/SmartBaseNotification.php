@@ -14,7 +14,7 @@ abstract class SmartBaseNotification extends BaseNotification {
 	protected function getSettingsWithGlobal() {
 		$settings = $this->getSettings();
 
-		if ( empty( $settings[ $this->get_id() ] ) ) {
+		if ( empty( $settings ) ) {
 			throw new BaseHandlerException( 'failed' );
 		}
 
@@ -30,7 +30,9 @@ abstract class SmartBaseNotification extends BaseNotification {
 		try {
 			$this->_requestData = $notifications->data;
 			$this->_instance    = $notifications;
-			$this->_settings    = $settings;
+			$this->_settings    = isset( $settings[ $this->get_id() ] )
+				? $settings[ $this->get_id() ]
+				: array();
 
 			$this->run_action();
 

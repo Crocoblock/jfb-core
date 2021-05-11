@@ -20,10 +20,20 @@ abstract class BaseHandler {
 		return self::$instance;
 	}
 
+
 	private function __construct() {
 		if ( wp_doing_ajax() && ! empty( $this->ajax_action() ) ) {
 			add_action( 'wp_ajax_' . $this->ajax_action(), array( $this, 'get_api_data' ) );
 		}
+	}
+
+	public function required_ajax_args() {
+		return array(
+			'api_key' => array(
+				'sanitize_func' => 'sanitize_text_field',
+				'save_func'     => array( $this, 'api_key' )
+			)
+		);
 	}
 
 	public function api_key( $api_key = '' ) {
@@ -43,12 +53,15 @@ abstract class BaseHandler {
 	}
 
 	public function get_api_data() {
-		if ( empty( $_REQUEST['api_key'] ) ) {
-			wp_send_json_error();
-		}
-
 		try {
-			$this->api_key( sanitize_text_field( $_REQUEST['api_key'] ) );
+			foreach ( $this->required_ajax_args() as $ajax_arg => $options ) {
+				if ( empty( $_REQUEST[ $ajax_arg ] ) ) {
+					wp_send_json_error( "Empty {$ajax_arg}" );
+				}
+				$value = call_user_func( $options['sanitize_func'], $_REQUEST[ $ajax_arg ] );
+
+				call_user_func( $options['save_func'], $value );
+			}
 			$this->filter_result();
 		} catch ( ApiHandlerException $exception ) {
 			wp_send_json_error( $this->parse_exception( $exception ) );

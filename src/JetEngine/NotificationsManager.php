@@ -29,6 +29,20 @@ abstract class NotificationsManager {
 			'jet-engine/forms/booking/notification-types',
 			array( $this, 'register_notifications' )
 		);
+		add_action(
+			'jet-engine/forms/editor/before-assets',
+			array( $this, 'register_assets_before' )
+		);
+		add_action(
+			'jet-engine/forms/editor/assets',
+			array( $this, 'register_assets' )
+		);
+	}
+
+	public function register_assets() {
+	}
+
+	public function register_assets_before() {
 	}
 
 	public function setup_notifications() {

@@ -14,29 +14,11 @@ abstract class BaseNotification {
 
 	abstract public function get_name();
 
-	public function __construct() {
-		add_action(
-			'jet-engine/forms/editor/before-assets',
-			array( $this, 'register_assets_before' )
-		);
-		add_action(
-			'jet-engine/forms/editor/assets',
-			array( $this, 'register_assets' )
-		);
-	}
-
-	public function register_assets() {
-	}
-
-	public function register_assets_before() {
-	}
-
 	public function vue_component_props() {
 		return array(
 			':fields' => 'availableFields'
 		);
 	}
-
 
 	/**
 	 * Fires on
