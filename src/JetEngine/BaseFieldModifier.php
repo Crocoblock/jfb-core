@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Jet_FB_SelectAutocomplete\JetEngine;
+namespace JFBCore\JetEngine;
 
 
 
