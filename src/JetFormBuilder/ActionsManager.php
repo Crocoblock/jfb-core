@@ -6,14 +6,14 @@ namespace JFBCore\JetFormBuilder;
 
 abstract class ActionsManager {
 
-	use WithJFBInit;
+	use WithInit;
 	use EditorAssetsManager;
 
-	protected function init() {
-		$this->jfb_maybe_init();
+	public function plugin_version_compare() {
+		return '1.2.0';
 	}
 
-	public function _on_jbf_init() {
+	public function on_plugin_init() {
 		add_action(
 			'jet-form-builder/actions/register',
 			array( $this, 'register_controller' )

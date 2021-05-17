@@ -6,13 +6,13 @@ namespace JFBCore\JetEngine;
 
 abstract class RegisterFormMetaBox {
 
-	public static function register() {
-		if ( function_exists( 'jet_engine' ) ) {
-			( new static() )->_add_hooks();
-		}
+	use WithInit;
+
+	public function plugin_version_compare() {
+		return '2.8.1';
 	}
 
-	private function _add_hooks() {
+	public function on_plugin_init() {
 		add_action(
 			'jet-engine/forms/editor/meta-boxes',
 			array( $this, 'register_meta_box' )
@@ -32,7 +32,7 @@ abstract class RegisterFormMetaBox {
 	abstract public function get_title();
 
 	public function get_fields() {
-		$slug = $this->get_id();
+		$slug    = $this->get_id();
 		$content = "<div id='jet-engine-meta-box-{$slug}'>Use <pre>wp.hooks.addFilter( 'jet.engine.register.metaBoxes' ... </pre></div>";
 
 		return array(

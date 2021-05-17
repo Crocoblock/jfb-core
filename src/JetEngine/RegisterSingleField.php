@@ -9,8 +9,13 @@ use JFBCore\VueComponentProps;
 trait RegisterSingleField {
 
 	use VueComponentProps;
+	use WithInit;
 
-	private function add_hooks() {
+	public function plugin_version_compare() {
+		return '2.8.1';
+	}
+
+	public function on_plugin_init() {
 		add_filter(
 			'jet-engine/forms/booking/field-types',
 			array( $this, 'register_form_fields' )
@@ -33,12 +38,6 @@ trait RegisterSingleField {
 			'jet-engine/forms/editor/assets',
 			array( $this, 'register_assets' )
 		);
-	}
-
-	public static function register() {
-		if ( function_exists( 'jet_engine' ) ) {
-			( new static() )->add_hooks();
-		}
 	}
 
 	public function register_assets_before() {

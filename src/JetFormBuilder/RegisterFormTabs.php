@@ -6,19 +6,15 @@ namespace JFBCore\JetFormBuilder;
 
 trait RegisterFormTabs {
 
-	use WithJFBInit;
+	use WithInit;
 
 	abstract public function tabs(): array;
 
-	public function jfb_version_compare() {
+	public function plugin_version_compare() {
 		return '1.2.0';
 	}
 
-	public static function register() {
-		( new static() )->jfb_maybe_init();
-	}
-
-	public function _on_jbf_init() {
+	public function on_plugin_init() {
 		add_filter( 'jet-form-builder/register-tabs-handlers', function ( $tabs ) {
 			$tabs = array_merge( $tabs, $this->tabs() );
 

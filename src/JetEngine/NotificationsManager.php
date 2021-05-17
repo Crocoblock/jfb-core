@@ -5,6 +5,8 @@ namespace JFBCore\JetEngine;
 
 abstract class NotificationsManager {
 
+	use WithInit;
+
 	public $notifications = array();
 
 	/**
@@ -12,17 +14,11 @@ abstract class NotificationsManager {
 	 */
 	abstract public function register_notification();
 
-	public function __construct() {
-		if ( $this->can_init() ) {
-			$this->add_hooks();
-		}
+	public function plugin_version_compare() {
+		return '2.8.1';
 	}
 
-	public function can_init() {
-		return function_exists( 'jet_engine' );
-	}
-
-	public function add_hooks() {
+	public function on_plugin_init() {
 		add_action( 'init', array( $this, 'setup_notifications' ) );
 
 		add_filter(

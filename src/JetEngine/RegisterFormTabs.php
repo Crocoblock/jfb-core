@@ -6,23 +6,19 @@ namespace JFBCore\JetEngine;
 
 trait RegisterFormTabs {
 
+	use WithInit;
+
 	abstract public function tabs(): array;
 
-	public function condition() {
-		return class_exists( 'Jet_Engine\Modules\Forms\Tabs\Tab_Manager' );
+	public function can_init() {
+		return class_exists( 'Jet_Engine\\Modules\\Forms\\Tabs\\Tab_Manager' );
 	}
 
-	public static function register() {
-		add_action( 'jet-engine/forms/init', function () {
-			$instance = ( new static() );
-
-			if ( $instance->condition() ) {
-				$instance->init();
-			}
-		} );
+	public function customize_init( $callable ) {
+		add_action( 'jet-engine/forms/init', $callable );
 	}
 
-	public function init() {
+	public function on_plugin_init() {
 		add_filter( 'jet-engine/dashboard/form-tabs', function ( $tabs ) {
 			$tabs = array_merge( $tabs, $this->tabs() );
 
