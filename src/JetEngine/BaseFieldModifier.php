@@ -4,7 +4,6 @@
 namespace JFBCore\JetEngine;
 
 
-
 use JFBCore\FieldModifierIT;
 use JFBCore\FieldModifierTrait;
 use JFBCore\VueComponentProps;
@@ -13,25 +12,24 @@ abstract class BaseFieldModifier implements FieldModifierIT {
 
     use FieldModifierTrait;
 	use VueComponentProps;
+	use WithInit;
 
-	public static function register(): void {
-		$self = new static();
+	public function plugin_version_compare() {
+		return '2.8.1';
+	}
 
-		if ( ! $self->condition() ) {
-			return;
-		}
-
+	public function on_plugin_init() {
 		add_action(
-			"jet-engine/forms/render/{$self->type()}",
-			array( $self, 'renderHandler' ), 10, 2
+			"jet-engine/forms/render/{$this->type()}",
+			array( $this, 'renderHandler' ), 10, 2
 		);
 		add_action(
 			'jet-engine/forms/edit-field/before',
-			array( $self, 'renderFieldControls' )
+			array( $this, 'renderFieldControls' )
 		);
 		add_action(
 			'jet-engine/forms/editor/assets',
-			array( $self, 'editorAssets' )
+			array( $this, 'editorAssets' )
 		);
 	}
 

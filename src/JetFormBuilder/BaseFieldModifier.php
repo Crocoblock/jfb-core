@@ -11,34 +11,29 @@ use JFBCore\FieldModifierTrait;
 abstract class BaseFieldModifier implements FieldModifierIT {
 
 	use FieldModifierTrait;
+	use WithInit;
 
-	public function blockAttributes( $args ): array {
-		return $args;
+	public function plugin_version_compare() {
+		return '1.2.0';
 	}
 
-	public static function register(): void {
-		$self = new static();
-
-		if ( ! $self->condition() ) {
-			return;
-		}
-
+	public function on_plugin_init() {
 		add_action(
-			"jet-form-builder/render/{$self->type()}",
-			array( $self, 'renderHandler' ), 10, 2
+			"jet-form-builder/render/{$this->type()}",
+			array( $this, 'renderHandler' ), 10, 2
 		);
 		add_action(
 			'jet-form-builder/editor-assets/before',
-			array( $self, 'editorAssets' )
+			array( $this, 'editorAssets' )
 		);
 		add_filter(
 			'register_block_type_args',
-			array( $self, '_blockAttributes' ), 10, 2
+			array( $this, '_blockAttributes' ), 10, 2
 		);
 	}
 
-	public function condition(): bool {
-		return true;
+	public function blockAttributes( $args ): array {
+		return $args;
 	}
 
 	public function getFormId(): int {

@@ -20,8 +20,6 @@ interface FieldModifierIT {
 
 	public function editorAssets(): void;
 
-	public function condition(): bool;
-
-	public static function register(): void;
+	public static function register();
 
 }
