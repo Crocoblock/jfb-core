@@ -31,9 +31,20 @@ abstract class RegisterFormMetaBox {
 
 	abstract public function get_title();
 
+	/**
+	 * Added for override
+	 * @return string
+	 */
+	public function component_slug() {
+		return $this->get_id();
+	}
+
+	public function component_placeholder() {
+		return "Use <pre>wp.hooks.addFilter( 'jet.engine.register.metaBoxes' ... </pre>";
+	}
+
 	public function get_fields() {
-		$slug    = $this->get_id();
-		$content = "<div id='jet-engine-meta-box-{$slug}'>Use <pre>wp.hooks.addFilter( 'jet.engine.register.metaBoxes' ... </pre></div>";
+		$content = "<div id='jet-engine-meta-box-{$this->component_slug()}'>{$this->component_placeholder()}</div>";
 
 		return array(
 			$this->get_id() => array(
