@@ -19,7 +19,7 @@ abstract class SmartBaseNotification extends BaseNotification {
 		}
 
 		return $this->getInstance()->get_settings_with_global(
-			$settings[ $this->get_id() ], $this->getGlobalOptionName()
+			$settings, $this->getGlobalOptionName()
 		);
 	}
 
